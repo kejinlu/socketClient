@@ -15,13 +15,14 @@
 #include <stdlib.h>
 
 #define BUFFER_SIZE 1024
+#define CHAT_SERVER_PORT 11332
 
 int main (int argc, const char * argv[])
 {
     struct sockaddr_in server_addr;
     server_addr.sin_len = sizeof(struct sockaddr_in);
     server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(11332);
+    server_addr.sin_port = htons(CHAT_SERVER_PORT);
     server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
     bzero(&(server_addr.sin_zero),8);
     
@@ -74,6 +75,7 @@ int main (int argc, const char * argv[])
                         printf("接受消息出错!\n");
                     }else{
                         printf("服务器端退出!\n");
+                        close(server_sock_fd);
                         exit(0);
                     }
 
@@ -82,7 +84,7 @@ int main (int argc, const char * argv[])
         }
         
     }
-    
+    close(server_sock_fd);
     return 0;
 }
 
