@@ -11,6 +11,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <unistd.h>
 
 int main (int argc, const char * argv[])
 {
@@ -45,9 +46,7 @@ int main (int argc, const char * argv[])
         }
         
     }
-    
-    // insert code here...
-    printf("Hello, World!\n");
+    close(server_socket);
     return 0;
 }
 
